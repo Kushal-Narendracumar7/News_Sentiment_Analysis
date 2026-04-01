@@ -22,34 +22,13 @@ def collect_news_data(keywords,days):
         'from' : (datetime.now() - timedelta(days = days)).strftime('%Y-%m-%d'),
         'to' : datetime.now().strftime('%Y-%m-%d'),
         'sortBy':'popularity',
-        'apiKey':os.getenv('NEWS_KEY')
-  599999999999999999999999993
-  
-  -
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+        'apiKey':os.getenv('NEWS_KEY')  
     }
 
     response = requests.get(API_URL,params = params)
     data = response.json()
     news_df = pd.DataFrame(data['articles'])
-    news_df = news_df[['title','description','content']]
+    news_df = news_df[['title','description','content','url']]
     news_df['text_to_analyze'] = news_df['title'] + ' ' + news_df['description'] + ' ' + news_df['content']
     return news_df
 
