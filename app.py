@@ -24,9 +24,9 @@ def main():
                 news_df = get_sentiments(news_df)
         
             with st.spinner("Generating Visualizations"):
-                st.barchart(news_df['sentiments'].value_counts().reset_index())
-
-                wc = WordCloud(width = 800,height = 400, background_color = 'white').generate_text(news_df['title'])
+                st.bar_chart(news_df['sentiments'].value_counts())
+                title = "".join(news_df['title'].dropna().astype(str))
+                wc = WordCloud(width = 800,height = 400, background_color = 'white').generate(title)
                 plt.figure(figsize = (10,6))
                 plt.imshow(wc,interpolation = 'bilinear')
                 plt.axis('off')
